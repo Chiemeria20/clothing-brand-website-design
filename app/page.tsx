@@ -24,7 +24,9 @@ const products = [
   { id: 18, name: 'Wine Utility Scrub Set', category: 'Scrubs', price: '₦36,000', image: '/scrub-wine.png', tone: 'Refined' },
   { id: 19, name: 'Sage Wrap Scrub Set', category: 'Scrubs', price: '₦35,000', image: '/scrub-sage.png', tone: 'Bestseller' },
   { id: 20, name: 'Sky Blue Comfort Scrub', category: 'Scrubs', price: '₦33,000', image: '/scrub-sky.png', tone: 'Made for long days' },
-]
+  { id: 21, name: 'The Blush Street Set', category: 'Women', price: '₦52,000', image: '/women-pink-coord-reference.jpg', tone: 'New in' },
+  { id: 22, name: 'The Soft Lounge Edit', category: 'Women', price: '₦46,000', image: '/women-wardrobe-reference.jpg', tone: 'Everyday ease' },
+  ]
 
 const categories = [
   { name: 'Women', label: 'Quiet confidence', image: '/category-women-genz.png' },
