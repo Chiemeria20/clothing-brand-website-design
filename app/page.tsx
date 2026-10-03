@@ -52,7 +52,8 @@ export default function Page() {
     const message = String(formData.get('message') ?? '')
     const subject = `RoyalJ enquiry from ${name}`
     const body = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`
-    window.location.href = `mailto:darafavour18@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    const mailtoUrl = `mailto:darafavour18@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    window.open(mailtoUrl, '_blank', 'noopener,noreferrer')
     setContactSent(true)
     event.currentTarget.reset()
   }
