@@ -57,14 +57,7 @@ export default function Page() {
 
   const filteredProducts = useMemo(() => activeCategory === 'All' ? products : products.filter((product) => product.category === activeCategory), [activeCategory])
   const cartProducts = useMemo(() => products.filter((product) => cart.includes(product.id)), [cart])
-  const whatsappLink = (product: (typeof products)[number]) => `https://wa.me/2348060465453?text=${encodeURIComponent(`Hi RoyalJ, I want to purchase this product:
-
-Product: ${product.name}
-Category: ${product.category}
-Price: ${product.price}
-Details: ${product.category === 'Scrubs' ? 'A practical unisex scrub set designed for comfortable, all-day wear.' : product.category === 'Women' ? 'A stylish women\'s fashion piece from the RoyalJ collection.' : 'A classic men\'s fashion piece from the RoyalJ collection.'}
-
-Please confirm if it is available and share the payment details.`)}`
+  const whatsappLink = (product: (typeof products)[number]) => `https://wa.me/2348060465453?text=${encodeURIComponent(`Hi, I want to purchase this ${product.name} (${product.price}). Is it available?`)}`
 
   return (
     <main className="min-h-screen bg-[#f7f5f1] text-[#1d2724]">
