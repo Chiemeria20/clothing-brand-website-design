@@ -61,6 +61,13 @@ export default function Page() {
   }
 
   useEffect(() => {
+    document.body.style.overflow = selectedProduct ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [selectedProduct])
+
+  useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     const productId = Number(params.get('product'))
     const linkedProduct = products.find((product) => product.id === productId)
