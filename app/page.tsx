@@ -95,7 +95,7 @@ export default function Page() {
         </nav>
         <div className="flex items-center gap-4">
           <a href="#favorites" aria-label={`Favorites with ${liked.length} saved items`} className="relative"><Heart className="size-[18px]" strokeWidth={1.6} />{liked.length > 0 && <span className="absolute -right-2 -top-2 flex size-4 items-center justify-center rounded-full bg-[#c9734a] text-[9px] text-white">{liked.length}</span>}</a>
-          <button aria-label="Account" className="hidden md:block"><UserRound className="size-[18px]" strokeWidth={1.6} /></button>
+          <a href="/sign-in" aria-label="Sign in to account" className="hidden md:block"><UserRound className="size-[18px]" strokeWidth={1.6} /></a>
           <button aria-label={`Shopping bag with ${cart.length} items`} className="relative" onClick={() => document.getElementById('cart')?.scrollIntoView({ behavior: 'smooth' })}><ShoppingBag className="size-[18px]" strokeWidth={1.6} />{cart.length > 0 && <span className="absolute -right-2 -top-2 flex size-4 items-center justify-center rounded-full bg-[#c9734a] text-[9px] text-white">{cart.length}</span>}</button>
         </div>
       </header>
