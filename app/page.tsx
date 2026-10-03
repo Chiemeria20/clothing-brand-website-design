@@ -18,12 +18,18 @@ const products = [
   { id: 12, name: 'The RoyalJ Everyday Set', category: 'Men', price: '₦48,000', image: '/category-men.png', tone: 'Signature' },
   { id: 13, name: 'The No-Suit Office Edit', category: 'Women', price: '₦59,000', image: '/women-corporate-no-suit.png', tone: 'New in' },
   { id: 14, name: 'The Gen Z Denim Edit', category: 'Women', price: '₦52,000', image: '/women-baggy-denim.png', tone: 'Signature' },
+  { id: 15, name: 'The Premium Everyday Set', category: 'Men', price: '₦54,000', image: '/male-premium-looks.png', tone: 'New in' },
+  { id: 16, name: 'The Tailored Sand Edit', category: 'Women', price: '₦57,000', image: '/women-premium-looks.png', tone: 'Signature' },
+  { id: 17, name: 'Navy Essential Scrub Set', category: 'Scrubs', price: '₦34,000', image: '/scrub-navy.png', tone: 'New in' },
+  { id: 18, name: 'Wine Utility Scrub Set', category: 'Scrubs', price: '₦36,000', image: '/scrub-wine.png', tone: 'Refined' },
+  { id: 19, name: 'Sage Wrap Scrub Set', category: 'Scrubs', price: '₦35,000', image: '/scrub-sage.png', tone: 'Bestseller' },
+  { id: 20, name: 'Sky Blue Comfort Scrub', category: 'Scrubs', price: '₦33,000', image: '/scrub-sky.png', tone: 'Made for long days' },
 ]
 
 const categories = [
-  { name: 'Women', label: 'Quiet confidence', image: '/category-women-genz.png' },
-  { name: 'Men', label: 'Everyday distinction', image: '/category-men.png' },
-  { name: 'Scrubs', label: 'Made for long days', image: '/category-scrub.png' },
+  { name: 'Women', label: 'Quiet confidence', image: '/women-premium-looks.png' },
+  { name: 'Men', label: 'Everyday distinction', image: '/male-premium-looks.png' },
+  { name: 'Scrubs', label: 'Made for long days', image: '/scrub-navy.png' },
 ]
 
 export default function Page() {
