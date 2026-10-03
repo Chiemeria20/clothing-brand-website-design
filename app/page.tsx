@@ -4,17 +4,22 @@ import { useMemo, useState } from 'react'
 import { ArrowRight, Heart, Menu, Search, ShoppingBag, UserRound, X } from 'lucide-react'
 
 const products = [
-  { id: 1, name: 'The Everyday Trouser', category: 'Women', price: '₦38,000', image: '/category-women.png', tone: 'New in' },
+  { id: 1, name: 'The Everyday Trouser', category: 'Women', price: '₦38,000', image: '/women-woody-coord.png', tone: 'New in' },
   { id: 2, name: 'Classic Relaxed Denim', category: 'Men', price: '₦42,000', image: '/male-casual-shirt.png', tone: 'Bestseller' },
   { id: 3, name: 'Essential Scrub Set', category: 'Scrubs', price: '₦32,000', image: '/category-scrub.png', tone: 'Made for long days' },
   { id: 4, name: 'The Soft Structure Blazer', category: 'Women', price: '₦58,000', image: '/brand-hero.png', tone: 'Limited' },
   { id: 5, name: 'The Boardroom Set', category: 'Men', price: '₦68,000', image: '/male-corporate.png', tone: 'Refined' },
   { id: 6, name: 'The Off-Duty Hoodie Set', category: 'Men', price: '₦52,000', image: '/male-hoodie-pants.png', tone: 'New in' },
   { id: 7, name: 'The Woody Co-ord', category: 'Men', price: '₦61,000', image: '/male-woodies-pants.png', tone: 'Limited' },
+  { id: 8, name: 'The Zip Collar Classic', category: 'Men', price: '₦55,000', image: '/male-zip-shirt.png', tone: 'New in' },
+  { id: 9, name: 'The Denim & Form Set', category: 'Women', price: '₦49,000', image: '/women-denim-top.png', tone: 'Bestseller' },
+  { id: 10, name: 'The Easy Corporate Edit', category: 'Women', price: '₦56,000', image: '/women-corporate.png', tone: 'Refined' },
+  { id: 11, name: 'The Tie Skirt Set', category: 'Women', price: '₦44,000', image: '/women-skirt-tie.png', tone: 'New in' },
+  { id: 12, name: 'The RoyalJ Everyday Set', category: 'Men', price: '₦48,000', image: '/category-men.png', tone: 'Signature' },
 ]
 
 const categories = [
-  { name: 'Women', label: 'Quiet confidence', image: '/category-women.png' },
+  { name: 'Women', label: 'Quiet confidence', image: '/category-women-new.png' },
   { name: 'Men', label: 'Everyday distinction', image: '/category-men.png' },
   { name: 'Scrubs', label: 'Made for long days', image: '/category-scrub.png' },
 ]
