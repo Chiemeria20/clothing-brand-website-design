@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'nué — Clothes with a point',
-  description: 'Classic, considered clothing for women, men, and nursing students. Shop the nué edit via WhatsApp.',
+  title: 'RoyalJ — Clothes with a point',
+  description: 'Classic, considered clothing for women, men, and nursing students. Shop the RoyalJ edit via WhatsApp.',
   generator: 'v0.app',
   icons: {
     icon: [
