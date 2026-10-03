@@ -27,9 +27,9 @@ const products = [
 ]
 
 const categories = [
-  { name: 'Women', label: 'Quiet confidence', image: '/women-premium-looks.png' },
-  { name: 'Men', label: 'Everyday distinction', image: '/male-premium-looks.png' },
-  { name: 'Scrubs', label: 'Made for long days', image: '/scrub-navy.png' },
+  { name: 'Women', label: 'Quiet confidence', image: '/category-women-new.png' },
+  { name: 'Men', label: 'Everyday distinction', image: '/category-men.png' },
+  { name: 'Scrubs', label: 'Made for long days', image: '/category-scrub.png' },
 ]
 
 export default function Page() {
