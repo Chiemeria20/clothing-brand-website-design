@@ -5,9 +5,12 @@ import { ArrowRight, Heart, Menu, Search, ShoppingBag, UserRound, X } from 'luci
 
 const products = [
   { id: 1, name: 'The Everyday Trouser', category: 'Women', price: '₦38,000', image: '/category-women.png', tone: 'New in' },
-  { id: 2, name: 'Classic Relaxed Denim', category: 'Men', price: '₦42,000', image: '/category-men.png', tone: 'Bestseller' },
+  { id: 2, name: 'Classic Relaxed Denim', category: 'Men', price: '₦42,000', image: '/male-casual-shirt.png', tone: 'Bestseller' },
   { id: 3, name: 'Essential Scrub Set', category: 'Scrubs', price: '₦32,000', image: '/category-scrub.png', tone: 'Made for long days' },
   { id: 4, name: 'The Soft Structure Blazer', category: 'Women', price: '₦58,000', image: '/brand-hero.png', tone: 'Limited' },
+  { id: 5, name: 'The Boardroom Set', category: 'Men', price: '₦68,000', image: '/male-corporate.png', tone: 'Refined' },
+  { id: 6, name: 'The Off-Duty Hoodie Set', category: 'Men', price: '₦52,000', image: '/male-hoodie-pants.png', tone: 'New in' },
+  { id: 7, name: 'The Woody Co-ord', category: 'Men', price: '₦61,000', image: '/male-woodies-pants.png', tone: 'Limited' },
 ]
 
 const categories = [
