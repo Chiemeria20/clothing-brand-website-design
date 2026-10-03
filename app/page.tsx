@@ -11,15 +11,17 @@ const products = [
   { id: 5, name: 'The Boardroom Set', category: 'Men', price: '₦68,000', image: '/male-corporate.png', tone: 'Refined' },
   { id: 6, name: 'The Off-Duty Hoodie Set', category: 'Men', price: '₦52,000', image: '/male-hoodie-pants.png', tone: 'New in' },
   { id: 7, name: 'The Woody Co-ord', category: 'Men', price: '₦61,000', image: '/male-woodies-pants.png', tone: 'Limited' },
-  { id: 8, name: 'The Zip Collar Classic', category: 'Men', price: '₦55,000', image: '/male-zip-shirt.png', tone: 'New in' },
-  { id: 9, name: 'The Denim & Form Set', category: 'Women', price: '₦49,000', image: '/women-denim-top.png', tone: 'Bestseller' },
-  { id: 10, name: 'The Easy Corporate Edit', category: 'Women', price: '₦56,000', image: '/women-corporate.png', tone: 'Refined' },
+  { id: 8, name: 'The Short-Sleeve Zip Classic', category: 'Men', price: '₦55,000', image: '/male-short-sleeve-brown.png', tone: 'New in' },
+  { id: 9, name: 'The Denim & Form Set', category: 'Women', price: '₦49,000', image: '/women-baggy-denim.png', tone: 'Bestseller' },
+  { id: 10, name: 'The Easy Corporate Edit', category: 'Women', price: '₦56,000', image: '/women-body-hug-corporate.png', tone: 'Refined' },
   { id: 11, name: 'The Tie Skirt Set', category: 'Women', price: '₦44,000', image: '/women-skirt-tie.png', tone: 'New in' },
   { id: 12, name: 'The RoyalJ Everyday Set', category: 'Men', price: '₦48,000', image: '/category-men.png', tone: 'Signature' },
+  { id: 13, name: 'The No-Suit Office Edit', category: 'Women', price: '₦59,000', image: '/women-corporate-no-suit.png', tone: 'New in' },
+  { id: 14, name: 'The Gen Z Denim Edit', category: 'Women', price: '₦52,000', image: '/women-baggy-denim.png', tone: 'Signature' },
 ]
 
 const categories = [
-  { name: 'Women', label: 'Quiet confidence', image: '/category-women-new.png' },
+  { name: 'Women', label: 'Quiet confidence', image: '/category-women-genz.png' },
   { name: 'Men', label: 'Everyday distinction', image: '/category-men.png' },
   { name: 'Scrubs', label: 'Made for long days', image: '/category-scrub.png' },
 ]
