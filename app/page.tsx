@@ -27,7 +27,7 @@ const products = [
 ]
 
 const categories = [
-  { name: 'Women', label: 'Quiet confidence', image: '/category-women-genz-banner.png' },
+  { name: 'Women', label: 'Quiet confidence', image: '/category-women-genz.png' },
   { name: 'Men', label: 'Everyday distinction', image: '/category-men.png' },
   { name: 'Scrubs', label: 'Made for long days', image: '/category-scrub.png' },
 ]
