@@ -26,6 +26,8 @@ const products = [
   { id: 20, name: 'Sky Blue Comfort Scrub', category: 'Scrubs', price: '₦33,000', image: '/scrub-sky.png', tone: 'Made for long days' },
   { id: 21, name: 'The Blush Street Set', category: 'Women', price: '₦52,000', image: '/women-pink-coord-reference.jpg', tone: 'New in' },
   { id: 22, name: 'The Soft Lounge Edit', category: 'Women', price: '₦46,000', image: '/women-wardrobe-reference.jpg', tone: 'Everyday ease' },
+  { id: 23, name: 'The Grey Wide-Leg Set', category: 'Men', price: '₦50,000', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20261003-WA0023-aGj1h6VdYUVl63LNjPSyyJsECC3kkL.jpg', tone: 'New in' },
+  { id: 24, name: 'The Charcoal Hoodie Set', category: 'Men', price: '₦54,000', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20261003-WA0024-vE1wMJFfOJEaTrfWDWcqAVhyGuugoE.jpg', tone: 'Everyday ease' },
   ]
 
 const categories = [
