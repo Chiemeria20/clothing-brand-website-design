@@ -1,47 +1,63 @@
+'use client'
+
+import { useMemo, useState } from 'react'
+import { ArrowRight, Heart, Menu, Search, ShoppingBag, UserRound, X } from 'lucide-react'
+
+const products = [
+  { id: 1, name: 'The Everyday Trouser', category: 'Women', price: '₦38,000', image: '/category-women.png', tone: 'New in' },
+  { id: 2, name: 'Classic Relaxed Denim', category: 'Men', price: '₦42,000', image: '/category-men.png', tone: 'Bestseller' },
+  { id: 3, name: 'Essential Scrub Set', category: 'Scrubs', price: '₦32,000', image: '/category-scrub.png', tone: 'Made for long days' },
+  { id: 4, name: 'The Soft Structure Blazer', category: 'Women', price: '₦58,000', image: '/brand-hero.png', tone: 'Limited' },
+]
+
+const categories = [
+  { name: 'Women', label: 'Quiet confidence', image: '/category-women.png' },
+  { name: 'Men', label: 'Everyday distinction', image: '/category-men.png' },
+  { name: 'Scrubs', label: 'Made for long days', image: '/category-scrub.png' },
+]
+
 export default function Page() {
+  const [activeCategory, setActiveCategory] = useState('All')
+  const [cart, setCart] = useState<number[]>([])
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [liked, setLiked] = useState<number[]>([])
+
+  const filteredProducts = useMemo(() => activeCategory === 'All' ? products : products.filter((product) => product.category === activeCategory), [activeCategory])
+  const whatsappLink = (product: string) => `https://wa.me/?text=${encodeURIComponent(`Hi, I want to purchase this ${product}. Is it available?`)}`
+
   return (
-    <main
-      style={{
-        colorScheme: 'light dark',
-        position: 'relative',
-        display: 'flex',
-        minHeight: '100vh',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'light-dark(#fff, #000)',
-        color: 'light-dark(#000, #fff)',
-      }}
-    >
-      <svg
-        aria-hidden="true"
-        style={{ width: 80, height: 80 }}
-        width={80}
-        height={80}
-        fill="none"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-        stroke="currentColor"
-        strokeWidth="0.5"
-      >
-        <path
-          d="M14.2 14.2H17V6.9375C17 4.76288 15.2371 3 13.0625 3H5.8V5.8M14.2 14.2V7.79063L7.79062 14.2H14.2ZM14.2 14.2V17H6.9375C4.76288 17 3 15.2371 3 13.0625V5.8H5.8M5.8 5.8V12.2313L12.2313 5.8H5.8Z"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <p
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: 'calc(50% + 56px)',
-          transform: 'translateX(-50%)',
-          whiteSpace: 'nowrap',
-          fontSize: '14px',
-          fontWeight: 500,
-          color: 'light-dark(#71717a, #a1a1aa)',
-        }}
-      >
-        Your v0 generation will show here.
-      </p>
+    <main className="min-h-screen bg-[#f7f5f1] text-[#1d2724]">
+      <div className="bg-[#1d2724] px-4 py-2 text-center text-[10px] font-medium uppercase tracking-[0.18em] text-[#f5efe5]">Thoughtfully made. Easily yours. Shop via WhatsApp.</div>
+      <header className="relative mx-auto flex max-w-[1440px] items-center justify-between px-5 py-5 md:px-10 lg:py-7">
+        <button className="lg:hidden" aria-label="Open menu" onClick={() => setMenuOpen(true)}><Menu /></button>
+        <a href="#top" className="font-serif text-2xl font-semibold tracking-[-0.06em] md:text-3xl">nué<span className="text-[#c9734a]">.</span></a>
+        <nav className="hidden items-center gap-9 text-[11px] font-semibold uppercase tracking-[0.16em] lg:flex">
+          {['Women', 'Men', 'Scrubs', 'Our story'].map((item) => <a key={item} href={item === 'Our story' ? '#story' : '#shop'}>{item}</a>)}
+        </nav>
+        <div className="flex items-center gap-4">
+          <button aria-label="Search"><Search className="size-[18px]" strokeWidth={1.6} /></button>
+          <button aria-label="Account" className="hidden md:block"><UserRound className="size-[18px]" strokeWidth={1.6} /></button>
+          <button aria-label={`Shopping bag with ${cart.length} items`} className="relative" onClick={() => document.getElementById('cart')?.scrollIntoView({ behavior: 'smooth' })}><ShoppingBag className="size-[18px]" strokeWidth={1.6} />{cart.length > 0 && <span className="absolute -right-2 -top-2 flex size-4 items-center justify-center rounded-full bg-[#c9734a] text-[9px] text-white">{cart.length}</span>}</button>
+        </div>
+      </header>
+      {menuOpen && <div className="fixed inset-0 z-20 bg-[#f7f5f1] p-6 lg:hidden"><div className="flex justify-end"><button aria-label="Close menu" onClick={() => setMenuOpen(false)}><X /></button></div><nav className="mt-20 flex flex-col gap-8 font-serif text-5xl"><a href="#shop" onClick={() => setMenuOpen(false)}>Women</a><a href="#shop" onClick={() => setMenuOpen(false)}>Men</a><a href="#shop" onClick={() => setMenuOpen(false)}>Scrubs</a><a href="#story" onClick={() => setMenuOpen(false)}>Our story</a></nav></div>}
+
+      <section id="top" className="mx-auto grid max-w-[1440px] gap-4 px-5 pb-8 md:px-10 lg:grid-cols-[1.08fr_.92fr] lg:gap-6 lg:pb-16">
+        <div className="flex min-h-[470px] flex-col justify-between bg-[#d9dfd5] p-7 md:min-h-[600px] md:p-12 lg:p-16">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#53635b]">The new everyday</p>
+          <div><h1 className="max-w-xl font-serif text-[clamp(3.9rem,8vw,8rem)] leading-[0.87] tracking-[-0.07em]">Clothes<br /><em className="font-light">with a point</em><span className="text-[#c9734a]">.</span></h1><p className="mt-8 max-w-xs text-sm leading-6 text-[#53635b]">Classic pieces, considered details, and a little room to be entirely yourself.</p><a href="#shop" className="mt-7 inline-flex items-center gap-3 border-b border-[#1d2724] pb-2 text-[11px] font-semibold uppercase tracking-[0.18em]">Explore the edit <ArrowRight className="size-4" /></a></div>
+        </div>
+        <div className="relative min-h-[470px] overflow-hidden md:min-h-[600px]"><img src="/brand-hero.png" alt="Model wearing a cream blazer from the new collection" className="absolute inset-0 size-full object-cover" /><div className="absolute bottom-6 left-6 text-white md:bottom-10 md:left-10"><p className="text-[10px] uppercase tracking-[0.2em]">Collection 01 / 26</p><p className="mt-2 font-serif text-3xl">Soft structure</p></div></div>
+      </section>
+
+      <section id="shop" className="mx-auto max-w-[1440px] px-5 py-12 md:px-10 md:py-20"><div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#c9734a]">Find your fit</p><h2 className="mt-3 font-serif text-5xl tracking-[-0.06em] md:text-6xl">Shop by category</h2></div><div className="flex gap-5 border-b border-[#cfd1ca] text-[11px] font-semibold uppercase tracking-[0.15em]"><button className={`pb-3 ${activeCategory === 'All' ? 'border-b-2 border-[#1d2724]' : 'text-[#7b837d]'}`} onClick={() => setActiveCategory('All')}>All</button>{['Women','Men','Scrubs'].map((category) => <button key={category} className={`pb-3 ${activeCategory === category ? 'border-b-2 border-[#1d2724]' : 'text-[#7b837d]'}`} onClick={() => setActiveCategory(category)}>{category}</button>)}</div></div>
+        <div className="mt-8 grid gap-3 md:grid-cols-3">{categories.map((category) => <a href="#products" key={category.name} onClick={() => setActiveCategory(category.name)} className="group relative min-h-[340px] overflow-hidden bg-[#d9dfd5]"><img src={category.image} alt={`${category.name} collection`} className="absolute inset-0 size-full object-cover transition duration-500 group-hover:scale-105" /><div className="absolute inset-0 bg-black/10" /><div className="absolute bottom-6 left-6 text-white"><p className="text-[10px] uppercase tracking-[0.2em]">{category.label}</p><h3 className="mt-1 font-serif text-4xl">{category.name}</h3></div><ArrowRight className="absolute bottom-6 right-6 text-white" /></a>)}</div>
+      </section>
+
+      <section id="products" className="mx-auto max-w-[1440px] px-5 pb-16 md:px-10 md:pb-28"><div className="flex items-center justify-between border-t border-[#d7d8d2] pt-8"><h2 className="font-serif text-4xl tracking-[-0.05em]">The edit <span className="font-sans text-sm text-[#7b837d]">({filteredProducts.length})</span></h2><p className="hidden text-[10px] uppercase tracking-[0.16em] text-[#7b837d] md:block">Tap a piece to make it yours</p></div><div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-4">{filteredProducts.map((product) => <article key={product.id} className="group"><div className="relative aspect-[.78] overflow-hidden bg-[#e6e5df]"><img src={product.image} alt={product.name} className="size-full object-cover transition duration-500 group-hover:scale-105" /><button aria-label={`Save ${product.name}`} onClick={() => setLiked((current) => current.includes(product.id) ? current.filter((id) => id !== product.id) : [...current, product.id])} className="absolute right-3 top-3 rounded-full bg-[#f7f5f1]/90 p-2"><Heart className={`size-4 ${liked.includes(product.id) ? 'fill-[#c9734a] text-[#c9734a]' : ''}`} strokeWidth={1.5} /></button><span className="absolute bottom-3 left-3 bg-[#f7f5f1]/90 px-2 py-1 text-[9px] uppercase tracking-[0.14em]">{product.tone}</span></div><div className="flex items-start justify-between gap-2 pt-4"><div><p className="font-serif text-lg leading-tight">{product.name}</p><p className="mt-1 text-[10px] uppercase tracking-[0.12em] text-[#7b837d]">{product.category} · {product.price}</p></div><button aria-label={`Add ${product.name} to bag`} onClick={() => setCart((current) => current.includes(product.id) ? current : [...current, product.id])} className="mt-1 text-[10px] font-semibold uppercase tracking-[0.1em] underline underline-offset-4">Add</button></div><a href={whatsappLink(product.name)} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.13em] text-[#c9734a]">Purchase via WhatsApp <ArrowRight className="size-3" /></a></article>)}</div></section>
+
+      <section id="story" className="bg-[#1d2724] px-5 py-16 text-[#f7f5f1] md:px-10 md:py-24"><div className="mx-auto grid max-w-[1200px] gap-10 md:grid-cols-[.8fr_1.2fr] md:items-end"><p className="text-[10px] uppercase tracking-[0.2em] text-[#d9dfd5]">Why nué</p><div><p className="font-serif text-4xl leading-[1.05] tracking-[-0.05em] md:text-6xl">For the days you&apos;re becoming, and the ones you already are.</p><p className="mt-7 max-w-md text-sm leading-6 text-[#bec8bd]">We make wardrobe foundations with presence. Designed to move between your real life, from first coffee to final rounds.</p></div></div></section>
+      <footer id="cart" className="mx-auto flex max-w-[1440px] flex-col gap-5 px-5 py-8 text-[10px] uppercase tracking-[0.14em] text-[#7b837d] md:flex-row md:items-center md:justify-between md:px-10"><p>© 2026 nué studio</p><p>{cart.length ? `${cart.length} item${cart.length > 1 ? 's' : ''} saved to your bag` : 'Your bag is empty — add something you love'}</p><a href="https://wa.me/" target="_blank" rel="noreferrer" className="text-[#1d2724] underline underline-offset-4">Chat with us on WhatsApp</a></footer>
     </main>
   )
 }
