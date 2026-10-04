@@ -17,7 +17,7 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
     const data = new FormData(event.currentTarget)
     const result = isSignUp ? await authClient.signUp.email({ name: String(data.get('name')), email: String(data.get('email')), password: String(data.get('password')) }) : await authClient.signIn.email({ email: String(data.get('email')), password: String(data.get('password')) })
     if (result.error) setError('We could not complete that request. Please check your details and try again.')
-    else { router.push('/'); router.refresh() }
+    else { const params = new URLSearchParams(window.location.search); const pending = params.get('pending'); const action = params.get('action'); router.replace(pending && action ? `/?pending=${pending}&action=${action}` : '/'); router.refresh() }
     setLoading(false)
   }
 
