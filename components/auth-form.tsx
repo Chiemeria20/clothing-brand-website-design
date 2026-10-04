@@ -21,7 +21,8 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
         : await authClient.signIn.email({ email: String(data.get('email')).trim().toLowerCase(), password: String(data.get('password')) })
       if (result.error) {
         const code = result.error.code
-        setError(code === 'USER_ALREADY_EXISTS' || code === 'email_exists' ? 'An account already exists with this email. Try signing in instead.' : isSignUp ? 'We could not create your account. Check your details and try again.' : 'The email or password is incorrect. Please try again.')
+        const message = String(result.error.message || '').toLowerCase()
+        setError(code === 'USER_ALREADY_EXISTS' || code === 'email_exists' || message.includes('already exist') ? 'An account already exists with this email. Try signing in instead.' : code === 'INVALID_PASSWORD' || code === 'INVALID_EMAIL_OR_PASSWORD' ? 'The email or password is incorrect. Please try again.' : message.includes('origin') ? 'This deployment is not configured for account access yet. Please open the latest deployment and try again.' : isSignUp ? 'We could not create your account. Check your details and try again.' : 'The email or password is incorrect. Please try again.')
         return
       }
       const params = new URLSearchParams(window.location.search)
