@@ -1,7 +1,7 @@
 'use client'
 
 import useSWR from 'swr'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowRight, Heart, Menu, ShoppingBag, UserRound, X } from 'lucide-react'
 
 const fetcher = (url: string) => fetch(url).then((response) => response.json())
@@ -50,6 +50,9 @@ export default function Page() {
   const [showAccountPrompt, setShowAccountPrompt] = useState(false)
   const [pendingAction, setPendingAction] = useState<{ productId: number; type: 'cart' | 'favorite' } | null>(null)
   const [stateHydrated, setStateHydrated] = useState(false)
+  const cartRef = useRef<number[]>([])
+  const favoritesRef = useRef<number[]>([])
+  const persistQueueRef = useRef(Promise.resolve())
   const { data: savedState } = useSWR<{ authenticated: boolean; cart: number[]; favorites: number[] }>('/api/user-state', fetcher)
 
   useEffect(() => {
@@ -60,6 +63,8 @@ export default function Page() {
     const pendingProduct = products.find((product) => product.id === pendingProductId)
     const nextCart = pendingProduct && pendingType === 'cart' && !savedState.cart.includes(pendingProduct.id) ? [...savedState.cart, pendingProduct.id] : savedState.cart
     const nextFavorites = pendingProduct && pendingType === 'favorite' && !savedState.favorites.includes(pendingProduct.id) ? [...savedState.favorites, pendingProduct.id] : savedState.favorites
+    cartRef.current = nextCart
+    favoritesRef.current = nextFavorites
     setCart(nextCart)
     setLiked(nextFavorites)
     setStateHydrated(true)
@@ -71,7 +76,12 @@ export default function Page() {
 
   const persistState = (nextCart: number[], nextFavorites: number[]) => {
     if (!stateHydrated || !savedState?.authenticated) return
-    void fetch('/api/user-state', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ cart: nextCart, favorites: nextFavorites }) })
+    persistQueueRef.current = persistQueueRef.current
+      .catch(() => undefined)
+      .then(async () => {
+        const response = await fetch('/api/user-state', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ cart: nextCart, favorites: nextFavorites }) })
+        if (!response.ok) throw new Error(`State sync failed: ${response.status}`)
+      })
   }
 
   const updateCart = (nextCart: number[] | ((current: number[]) => number[]), productId?: number) => {
@@ -82,7 +92,8 @@ export default function Page() {
     }
     setCart((current) => {
       const resolved = typeof nextCart === 'function' ? nextCart(current) : nextCart
-      persistState(resolved, liked)
+      cartRef.current = resolved
+      persistState(resolved, favoritesRef.current)
       return resolved
     })
   }
@@ -95,7 +106,8 @@ export default function Page() {
     }
     setLiked((current) => {
       const resolved = typeof nextFavorites === 'function' ? nextFavorites(current) : nextFavorites
-      persistState(cart, resolved)
+      favoritesRef.current = resolved
+      persistState(cartRef.current, resolved)
       return resolved
     })
   }

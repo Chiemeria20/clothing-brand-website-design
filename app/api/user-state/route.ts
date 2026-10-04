@@ -24,14 +24,16 @@ export async function GET() {
 export async function PUT(request: Request) {
   const userId = await getUserId()
   if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  const body = await request.json() as { cart?: number[]; favorites?: number[] }
-  if (body.cart) {
+  const body = await request.json() as { cart?: unknown; favorites?: unknown }
+  const cart = Array.isArray(body.cart) ? [...new Set(body.cart.filter((value): value is number => Number.isInteger(value) && value > 0))] : undefined
+  const favorites = Array.isArray(body.favorites) ? [...new Set(body.favorites.filter((value): value is number => Number.isInteger(value) && value > 0))] : undefined
+  if (cart) {
     await db.delete(cartItem).where(eq(cartItem.userId, userId))
-    if (body.cart.length) await db.insert(cartItem).values(body.cart.map((productId) => ({ id: crypto.randomUUID(), userId, productId })))
+    if (cart.length) await db.insert(cartItem).values(cart.map((productId) => ({ id: crypto.randomUUID(), userId, productId })))
   }
-  if (body.favorites) {
+  if (favorites) {
     await db.delete(savedItem).where(eq(savedItem.userId, userId))
-    if (body.favorites.length) await db.insert(savedItem).values(body.favorites.map((productId) => ({ id: crypto.randomUUID(), userId, productId })))
+    if (favorites.length) await db.insert(savedItem).values(favorites.map((productId) => ({ id: crypto.randomUUID(), userId, productId })))
   }
   return NextResponse.json({ ok: true })
 }
