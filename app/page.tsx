@@ -79,6 +79,17 @@ export default function Page() {
     }
   }, [savedState])
 
+  const handleLogout = async () => {
+    await authClient.signOut()
+    cartRef.current = []
+    favoritesRef.current = []
+    setCart([])
+    setLiked([])
+    setAccountOpen(false)
+    setMenuOpen(false)
+    window.location.reload()
+  }
+
   const persistState = (nextCart: number[], nextFavorites: number[]) => {
     if (!stateHydrated || !savedState?.authenticated) return
     persistQueueRef.current = persistQueueRef.current
@@ -170,7 +181,7 @@ export default function Page() {
         </nav>
         <div className="flex items-center gap-4">
           <a href="#favorites" aria-label={`Favorites with ${liked.length} saved items`} className="relative"><Heart className="size-[18px]" strokeWidth={1.6} />{liked.length > 0 && <span className="absolute -right-2 -top-2 flex size-4 items-center justify-center rounded-full bg-[#c9734a] text-[9px] text-white">{liked.length}</span>}</a>
-          <div className="relative hidden md:block"><button type="button" aria-label="Open account menu" aria-expanded={accountOpen} onClick={() => setAccountOpen((open) => !open)} className="flex items-center gap-2"><UserRound className="size-[18px]" strokeWidth={1.6} />{session?.user && <span className="max-w-24 truncate text-[10px] uppercase tracking-[0.12em]">{session.user.name}</span>}</button>{accountOpen && <div className="absolute right-0 top-9 z-20 w-52 rounded-2xl border border-[#c9d0c7] bg-[#f7f5f1] p-2 shadow-[0_18px_40px_rgba(29,39,36,0.14)]"><div className="px-3 py-2 text-[10px] uppercase tracking-[0.14em] text-[#7b837d]">{session?.user ? `Signed in as ${session.user.name}` : 'Your RoyalJ account'}</div>{session?.user ? <><a href="#favorites" onClick={() => setAccountOpen(false)} className="block rounded-xl px-3 py-3 text-sm hover:bg-[#eeece6]">Saved items <span className="text-[#7b837d]">({liked.length})</span></a><a href="#cart" onClick={() => setAccountOpen(false)} className="block rounded-xl px-3 py-3 text-sm hover:bg-[#eeece6]">Your bag <span className="text-[#7b837d]">({cart.length})</span></a><button type="button" onClick={() => authClient.signOut().then(() => setAccountOpen(false))} className="w-full rounded-xl px-3 py-3 text-left text-sm text-[#c9734a] hover:bg-[#eeece6]">Log out</button></> : <><a href="/sign-in" className="block rounded-xl px-3 py-3 text-sm hover:bg-[#eeece6]">Continue with account</a><a href="/sign-up" className="block rounded-xl px-3 py-3 text-sm hover:bg-[#eeece6]">Create an account</a></>}</div>}</div>
+          <div className="relative hidden md:block"><button type="button" aria-label="Open account menu" aria-expanded={accountOpen} onClick={() => setAccountOpen((open) => !open)} className="flex items-center gap-2"><UserRound className="size-[18px]" strokeWidth={1.6} />{session?.user && <span className="max-w-24 truncate text-[10px] uppercase tracking-[0.12em]">{session.user.name}</span>}</button>{accountOpen && <div className="absolute right-0 top-9 z-20 w-52 rounded-2xl border border-[#c9d0c7] bg-[#f7f5f1] p-2 shadow-[0_18px_40px_rgba(29,39,36,0.14)]"><div className="px-3 py-2 text-[10px] uppercase tracking-[0.14em] text-[#7b837d]">{session?.user ? `Signed in as ${session.user.name}` : 'Your RoyalJ account'}</div>{session?.user ? <><a href="#favorites" onClick={() => setAccountOpen(false)} className="block rounded-xl px-3 py-3 text-sm hover:bg-[#eeece6]">Saved items <span className="text-[#7b837d]">({liked.length})</span></a><a href="#cart" onClick={() => setAccountOpen(false)} className="block rounded-xl px-3 py-3 text-sm hover:bg-[#eeece6]">Your bag <span className="text-[#7b837d]">({cart.length})</span></a><button type="button" onClick={handleLogout} className="w-full rounded-xl px-3 py-3 text-left text-sm text-[#c9734a] hover:bg-[#eeece6]">Log out</button></> : <><a href="/sign-in" className="block rounded-xl px-3 py-3 text-sm hover:bg-[#eeece6]">Continue with account</a><a href="/sign-up" className="block rounded-xl px-3 py-3 text-sm hover:bg-[#eeece6]">Create an account</a></>}</div>}</div>
           <button aria-label={`Shopping bag with ${cart.length} items`} className="relative" onClick={() => document.getElementById('cart')?.scrollIntoView({ behavior: 'smooth' })}><ShoppingBag className="size-[18px]" strokeWidth={1.6} />{cart.length > 0 && <span className="absolute -right-2 -top-2 flex size-4 items-center justify-center rounded-full bg-[#c9734a] text-[9px] text-white">{cart.length}</span>}</button>
         </div>
       </header>
